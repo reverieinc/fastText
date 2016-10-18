@@ -4,4 +4,5 @@
 *.vec
 data
 fasttext
+fasttext_api
 result

@@ -10,13 +10,14 @@
 CXX = c++
 CXXFLAGS = -pthread -std=c++0x
 OBJS = args.o dictionary.o matrix.o vector.o model.o utils.o fasttext.o
-INCLUDES = -I.
+INCLUDES = -I. -I/usr/local/include/
+LDFLAGS = -L/usr/local/lib/ -lnet
 
 opt: CXXFLAGS += -O3 -funroll-loops
-opt: fasttext
+opt: fasttext fasttext_api
 
 debug: CXXFLAGS += -g -O0 -fno-inline
-debug: fasttext
+debug: fasttext fasttext_api
 
 args.o: src/args.cc src/args.h
 	$(CXX) $(CXXFLAGS) -c src/args.cc
@@ -41,6 +42,9 @@ fasttext.o: src/fasttext.cc src/*.h
 
 fasttext: $(OBJS) src/fasttext.cc
 	$(CXX) $(CXXFLAGS) $(OBJS) src/main.cc -o fasttext
+
+fasttext_api: $(OBJS) src/fasttext_api.cc
+	$(CXX) $(CXXFLAGS) $(OBJS) src/fasttext_api.cc -o fasttext_api $(LDFLAGS)
 
 clean:
 	rm -rf *.o fasttext

@@ -1,3 +1,7 @@
+## Reverie Details
+
+To build and use fasttext_api as API, you will also need to install [Pistache](https://github.com/oktal/pistache)
+
 # fastText
 
 fastText is a library for efficient learning of word representations and sentence classification.
